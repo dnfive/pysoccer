@@ -14,9 +14,9 @@ in_menu = True
 positions = ['LW', 'ST', 'SS', 'RW', 'LM', 'AM', 'M', 'RM', 'DM', 'LB', 'CB', 'RB', 'GK']
 nationalities = ['ENG', 'BR', 'ESP']
 leagues = ['PL', 'BRA', 'LL']
-staff_roles = ['player training', 'pt', 'player physiotherapy', 'pp',
-               'player medical', 'pm', 'head scout', 'hs',
-               'assistant scout', 'as']
+staff_roles = ['тренер', 'pt', 'физиотерапевт', 'ph',
+               'врач', 'med', 'главный скаут', 'hs',
+               'скаут', 'as']
 
 ## Names
 ### English names (41 names in total)
@@ -68,7 +68,7 @@ class Staff:
         self.name = name
         self.role = role
     def __del__(self):
-        print("%s (%s) was fired"%(self.name, self.role))
+        print("%s (%s) был уволен"%(self.name, self.role))
 
 class Player:
     def __init__(self, name, age, position, shooting, dribbling, speed, passing, positioning, defense):
@@ -87,7 +87,7 @@ class Player:
         self.positioning = int(positioning)
         self.defense = int(defense)
     def __del__(self):
-        print("%s was sent away"%(self.name))
+        print("%s был продан"%(self.name))
 
 class Team:
     def __init__(self, name, league, home_country):
@@ -130,8 +130,8 @@ def random_name(nationality):
         raise ValueError("Invalid nationality in random name generator")
 
 def create_game():
-    tn = input("Team name: ")
-    tl = input("Select a league: [1] PRIME LEAGUE (PL) | [2] BRAZILEIRINHO (BR) | [3] LE LEAGUE (LL)\n> ")
+    tn = input("Введите название команды: ")
+    tl = input("Выберите лигу: \n[1] Английская премьер лига (PL) | \n[2] Лига Бразилии (BR) | \n[3] Испанская лига короля (LL)\n> ")
     if tl == '1':
         tl = 'PRIME LEAGUE'
         ht = 'ENG'
@@ -144,19 +144,19 @@ def create_game():
     else:
         raise ValueError("Invalid league", tl)
     t = Team(tn, tl, ht)
-    print("Generating staff...")
-    t.random_staff(t.home_country, 'player training')
-    t.random_staff(t.home_country, 'player physiotherapy')
-    t.random_staff(t.home_country, 'player medical')
-    t.random_staff(t.home_country, 'head scout')
-    t.random_staff(t.home_country, 'assistant scout')
-    print("Staff was generated")
+    print("Набираем персонал...")
+    t.random_staff(t.home_country, 'тренер')
+    t.random_staff(t.home_country, 'физиотерапевт')
+    t.random_staff(t.home_country, 'медик')
+    t.random_staff(t.home_country, 'главный скаут')
+    t.random_staff(t.home_country, 'скаут')
+    print("Персонал набран.")
     
     
 def check(inp):
     if inp == '1':
         # New game
-        print("Creating new game...")
+        print("Создание новой игры...")
         in_menu = False
         create_game()
         return None
@@ -165,11 +165,11 @@ def check(inp):
         return print("Coming soon")
     elif inp == '3':
         # Exit
-        print("Exiting game...")
+        print("Выход из игры...")
         return sys.exit(0)
 # Main
 if __name__=='__main__':
-    print("----- Pysoccer -----\n1 - New game\n2 - Load game\n3 - Exit")
+    print("----- Pysoccer -----\n1 - Новая игра\n2 - Загрузить игру\n3 - Выход")
     while in_menu == True:
         usr = str(input("\n> "))
         check(usr)
